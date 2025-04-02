@@ -6,28 +6,40 @@ This project was developed as part of the **MSBA 680: Big Data & Innovation** co
 
 ---
 
-## Features
+## 🚀 Features
 
-### Local Food Market Heatmap
+### 🗺️ Local Food Market Heatmap
 - Visualizes farmers market density across the U.S. using USDA geospatial data.
 - Helps identify underserved regions and market opportunities.
 
-### Food Waste Estimator
-- Calculates estimated food waste, environmental impact, and potential financial loss based on user input.
-- Uses USDA waste rates to simulate spoilage, CO₂ emissions, and economic value lost.
+### 🥕 Food Waste Estimator
+- Calculates estimated food waste, CO₂ emissions, and financial loss based on product type and quantity.
+- Pulls real waste rates from USDA datasets across multiple food groups:
+  - Fruit
+  - Vegetables
+  - Meat, poultry, fish, eggs, and nuts
+  - Grains
+  - Dairy
 
 ---
 
-## Data Sources
+## 📊 Data Sources
 
-- [USDA Farmers Market Directory (CSV)](https://catalog.data.gov/dataset/farmers-markets)
-- [USDA Food Waste Estimates](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/)
+All datasets are provided by the U.S. Department of Agriculture (USDA):
 
-> _Note: These datasets are not included in the repository due to size. You'll need to download and add them manually._
+- [USDA Farmers Market Directory](https://catalog.data.gov/dataset/farmers-markets)
+- [USDA Food Availability (Per Capita) Data System](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/), including:
+  - [Fruit](https://www.ers.usda.gov/webdocs/DataFiles/47788/Fruit.csv)
+  - [Vegetables](https://www.ers.usda.gov/webdocs/DataFiles/47788/Vegetables.csv)
+  - [Grains](https://www.ers.usda.gov/webdocs/DataFiles/47788/Grain.csv)
+  - [Meat, poultry, fish, eggs, and nuts](https://www.ers.usda.gov/webdocs/DataFiles/47788/Meat.csv)
+  - [Dairy](https://www.ers.usda.gov/webdocs/DataFiles/47788/Dairy.csv)
+
+> _Note: These datasets are stored locally in the `/data` directory and not included in the public repo due to file size._
 
 ---
 
-## How to Run
+## 🛠️ How to Run
 
 1. **Clone the repo**
    ```bash
@@ -46,11 +58,14 @@ This project was developed as part of the **MSBA 680: Big Data & Innovation** co
    pip install -r requirements.txt
    ```
 
-4. **Download the USDA Farmers Market CSV**  
-   You can download the dataset from the [USDA Farmers Market Directory](https://catalog.data.gov/dataset/farmers-markets)  
-   and place it in the `data/` folder of this project.
-
-   *(Note: The dataset is not included in the repo due to its size.)*
+4. **Place the USDA datasets**  
+   Copy the following files into the `data/` folder:
+   - `Farmers_Markets.csv`
+   - `Fruit.csv`
+   - `veg.csv`
+   - `grain.csv`
+   - `meat.csv`
+   - `Dairy.csv`
 
 5. **Run the Streamlit app**
    ```bash
@@ -59,34 +74,34 @@ This project was developed as part of the **MSBA 680: Big Data & Innovation** co
 
 ---
 
-## Data Ethics & Stewardship
+## 🔐 Data Ethics & Stewardship
 
 FarmLinkIQ is built on principles of responsible data use:
-- Only public, freely available datasets are used.
-- No personal or private data is collected or stored.
-- The tool aims to improve **equity, sustainability, and access** in local food systems.
+- Uses only public, government-provided datasets
+- Promotes transparency, access, and equity
+- Aims to improve sustainability through smart, data-informed agriculture
 
 ---
 
-## Future Work
+## 🧠 Future Work
 
 This prototype could be expanded to include:
-- AI-driven buyer-seller matching
-- Dynamic pricing recommendations
-- User authentication and saved profiles
-- Real-time weather and market alerts
+- AI-powered buyer/seller matching
+- Real-time pricing optimization
+- Integration with weather + satellite data
+- Farmer or consumer login for customized insights
 
 ---
 
-## Acknowledgments
+## 🙌 Acknowledgments
 
 Special thanks to:
-- Dr. Erik Guzik – for his guidance in the MSBA 680 course
-- USDA and ERS for providing publicly available agricultural data
-- Streamlit and open-source Python communities
+- Dr. Erik Guzik – for guidance in the MSBA 680 course
+- USDA Economic Research Service – for high-quality, public datasets
+- The open-source Python and Streamlit community
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
