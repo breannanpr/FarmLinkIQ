@@ -1,27 +1,33 @@
-# FarmLinkIQ
-Big Data for Homegrown, Local Food and Livestock Market Matching.
+# 🌱 FarmLinkIQ Prototype
 
-## FarmLinkIQ Prototype
+**FarmLinkIQ** is a lightweight, data-driven prototype designed to support local and small-scale agricultural producers. It helps farmers identify demand gaps, reduce food waste, and optimize their impact using publicly available datasets.
 
-This is a prototype for **FarmLinkIQ**, a data-driven platform designed to help small and local food producers make smarter, more sustainable decisions using public agricultural data.
-
-The prototype features two key tools:
-1. **Local Food Market Heatmap**  
-   Visualizes farmers market density across the U.S. using USDA geospatial data.
-
-2. **Food Waste Estimator**  
-   Allows farmers to estimate spoilage, environmental impact, and potential financial loss based on produce type and quantity.
+This project was developed as part of the **MSBA 680: Big Data & Innovation** course at the University of Montana. It showcases how open data and simple AI/analytics tools can empower producers and contribute to more sustainable food systems.
 
 ---
 
-## Project Purpose
+## Features
 
-This project was developed as part of the MSBA 680: Big Data & Innovation course at the University of Montana.  
-It demonstrates how open data + simple AI logic can deliver **real-world insights** for food system innovation and sustainability.                  
+### Local Food Market Heatmap
+- Visualizes farmers market density across the U.S. using USDA geospatial data.
+- Helps identify underserved regions and market opportunities.
+
+### Food Waste Estimator
+- Calculates estimated food waste, environmental impact, and potential financial loss based on user input.
+- Uses USDA waste rates to simulate spoilage, CO₂ emissions, and economic value lost.
 
 ---
 
-## 🛠️ How to Run
+## Data Sources
+
+- [USDA Farmers Market Directory (CSV)](https://catalog.data.gov/dataset/farmers-markets)
+- [USDA Food Waste Estimates](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/)
+
+> _Note: These datasets are not included in the repository due to size. You'll need to download and add them manually._
+
+---
+
+## How to Run
 
 1. **Clone the repo**
    ```bash
@@ -53,35 +59,34 @@ It demonstrates how open data + simple AI logic can deliver **real-world insight
 
 ---
 
-## Tech Stack
-- Python
-- Streamlit
-- Pandas
-- Folium (for mapping)
-- USDA Open Data
-
----
-
-## Data Sources
-- USDA Farmers Market Directory
-- USDA Food Waste Estimates
-
----
-
 ## Data Ethics & Stewardship
-FarmLinkIQ is committed to:
-- Using public data responsibly
-- Respecting privacy and transparency
-- Enabling equitable access to local food
+
+FarmLinkIQ is built on principles of responsible data use:
+- Only public, freely available datasets are used.
+- No personal or private data is collected or stored.
+- The tool aims to improve **equity, sustainability, and access** in local food systems.
 
 ---
 
 ## Future Work
-- Add buyer-seller matching system
-- Incorporate pricing recommendations
-- Expand visualizations with real-time weather data
+
+This prototype could be expanded to include:
+- AI-driven buyer-seller matching
+- Dynamic pricing recommendations
+- User authentication and saved profiles
+- Real-time weather and market alerts
+
+---
+
+## Acknowledgments
+
+Special thanks to:
+- Dr. Erik Guzik – for his guidance in the MSBA 680 course
+- USDA and ERS for providing publicly available agricultural data
+- Streamlit and open-source Python communities
 
 ---
 
 ## License
-This project is licensed under the MIT License.
+
+This project is licensed under the [MIT License](LICENSE).
