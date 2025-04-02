@@ -23,33 +23,33 @@ It demonstrates how open data + simple AI logic can deliver **real-world insight
 
 ## 🛠️ How to Run
 
-1. **Clone the repo**  
+1. **Clone the repo**
    ```bash
-   git clone https://github.com/your-username/FarmLinkIQ-Prototype.git
-   cd FarmLinkIQ-Prototype
+   git clone https://github.com/breannanpr/FarmLinkIQ.git
+   cd FarmLinkIQ
+   ```
 
-Set up a virtual environment (optional but recommended)
+2. **Set up a virtual environment** (optional but recommended)
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
 
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-Install dependencies
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Download the USDA Farmers Market CSV
-You can get it from this link and place it in the data/ folder (not included here due to size).
+4. **Download the USDA Farmers Market CSV**  
+   You can download the dataset from the [USDA Farmers Market Directory](https://catalog.data.gov/dataset/farmers-markets)  
+   and place it in the `data/` folder of this project.
 
-Run the Streamlit app
+   *(Note: The dataset is not included in the repo due to its size.)*
 
-bash
-Copy
-Edit
-streamlit run app/main.py
+5. **Run the Streamlit app**
+   ```bash
+   streamlit run app/main.py
+   ```
 
 ---
 
