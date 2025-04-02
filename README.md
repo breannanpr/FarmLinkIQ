@@ -24,17 +24,17 @@ It demonstrates how open data + simple AI logic can deliver **real-world insight
 ## 🛠️ How to Run
 
 1. **Clone the repo**  
-  ```bash
-  git clone https://github.com/your-username/FarmLinkIQ-Prototype.git
-  cd FarmLinkIQ-Prototype
-  '''
+   ```bash
+   git clone https://github.com/your-username/FarmLinkIQ-Prototype.git
+   cd FarmLinkIQ-Prototype
 
-2. **Set up a virtual environment (optional but recommended)**
-  ```bash
-  Copy
-  Edit
-  python -m venv venv
-  source venv/bin/activate  # On Windows use: venv\Scripts\activate
+Set up a virtual environment (optional but recommended)
+
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 3. **Install dependencies**
   ```bash
