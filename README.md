@@ -35,21 +35,21 @@ Copy
 Edit
 python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
+Install dependencies
 
-3. **Install dependencies**
-  ```bash
-  Copy
-  Edit
-  pip install -r requirements.txt
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Download the USDA Farmers Market CSV
+You can get it from this link and place it in the data/ folder (not included here due to size).
 
-4. **Download the USDA Farmers Market CSV**
-  You can get it from this link and place it in the data/ folder (not included here due to size).
+Run the Streamlit app
 
-5. **Run the Streamlit app**
-  ```bash
-  Copy
-  Edit
-  streamlit run app/main.py
+bash
+Copy
+Edit
+streamlit run app/main.py
 
 ---
 
