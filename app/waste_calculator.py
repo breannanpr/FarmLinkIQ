@@ -2,7 +2,6 @@ import pandas as pd
 import os
 
 def load_all_food_data(data_dir="data"):
-    """Loads all USDA food loss CSV files and returns a combined dataframe with unified formatting."""
     files = {
         "Fruit": "Fruit.csv",
         "Vegetables": "veg.csv",
@@ -28,38 +27,26 @@ def load_all_food_data(data_dir="data"):
 
     combined_df = pd.concat(all_data, ignore_index=True)
 
-    # Clean up commodity names for search and matching
+    # Clean names for dropdown consistency
     combined_df["CleanName"] = combined_df["Commodity"].fillna("").str.replace(r":.*$", "", regex=True).str.strip()
 
     return combined_df
 
 def get_food_options(df):
-    """Returns a sorted list of available food items (CleanName) for the UI."""
     return df[["CleanName", "Commodity"]].drop_duplicates().sort_values("CleanName")
 
 def estimate_waste(df, selected_clean_name, quantity_lbs):
-    """
-    Calculates estimated food waste and emissions based on USDA loss percentages.
-
-    Returns a dictionary with:
-    - waste_lbs
-    - emissions_lbs
-    - total_loss_pct
-    - source_file
-    - category
-    - original_name
-    """
-    match = df[df["CleanName"] == selected_clean_name]
+    # Safer match in case of case/space differences
+    match = df[df["CleanName"].str.strip().str.lower() == selected_clean_name.strip().lower()]
     if match.empty:
         return None
 
     row = match.iloc[0]
-
     retail_loss = float(row.get("Retail loss", 0)) / 100
     consumer_loss = float(row.get("Consumer loss", 0)) / 100
     total_loss = retail_loss + consumer_loss
 
-    EMISSIONS_PER_LB = 1.9  # US EPA estimate for general food waste
+    EMISSIONS_PER_LB = 1.9
     waste_lbs = quantity_lbs * total_loss
     emissions_lbs = waste_lbs * EMISSIONS_PER_LB
 
