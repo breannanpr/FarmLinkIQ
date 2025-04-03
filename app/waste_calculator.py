@@ -1,7 +1,9 @@
+# Updated waste_calculator.py with better structure and error handling
 import pandas as pd
 import os
 
 def load_all_food_data(data_dir="data"):
+    """Load food waste datasets from multiple categories."""
     files = {
         "Fruit": "Fruit.csv",
         "Vegetables": "veg.csv",
@@ -22,17 +24,19 @@ def load_all_food_data(data_dir="data"):
         except Exception as e:
             print(f"Error loading {filename}: {e}")
 
+    if not all_data:
+        raise RuntimeError("No datasets could be loaded from the specified directory.")
+
     return pd.concat(all_data, ignore_index=True)
 
-
 def get_food_options(df):
-    # Clean food names by removing "Per capita availability..." and similar text
+    """Extract unique food item names in clean format."""
+    df = df[df["Commodity"].notnull()]
     df["CleanName"] = df["Commodity"].str.replace(r":.*$", "", regex=True).str.strip()
     return df[["CleanName", "Commodity"]].drop_duplicates().sort_values("CleanName")
 
-
 def estimate_waste(df, selected_clean_name, quantity_lbs):
-    # Map clean name to original row
+    """Estimate food waste and emissions based on quantity selected."""
     match = df[df["CleanName"] == selected_clean_name]
     if match.empty:
         return None
@@ -42,7 +46,7 @@ def estimate_waste(df, selected_clean_name, quantity_lbs):
     consumer_loss = float(row.get("Consumer loss", 0)) / 100
     total_loss = retail_loss + consumer_loss
 
-    EMISSIONS_PER_LB = 1.9
+    EMISSIONS_PER_LB = 1.9  # lbs CO2 per lb of food waste
     waste_lbs = quantity_lbs * total_loss
     emissions_lbs = waste_lbs * EMISSIONS_PER_LB
 
@@ -50,5 +54,7 @@ def estimate_waste(df, selected_clean_name, quantity_lbs):
         "waste_lbs": round(waste_lbs, 2),
         "emissions_lbs": round(emissions_lbs, 2),
         "total_loss_pct": round(total_loss * 100, 1),
-        "source_file": row.get("SourceFile")
+        "source_file": row.get("SourceFile"),
+        "category": row.get("Category"),
+        "original_name": row.get("Commodity")
     }

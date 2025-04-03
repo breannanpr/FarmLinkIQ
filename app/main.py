@@ -1,3 +1,4 @@
+# Updated main.py without infinite launch loop
 import streamlit as st
 
 st.set_page_config(page_title="FarmLinkIQ Prototype", layout="wide")
@@ -15,7 +16,7 @@ menu = st.sidebar.radio("Choose a tool:", ["🗺️ Market Heatmap", "🥕 Food 
 
 if menu == "🗺️ Market Heatmap":
     st.header("🗺️ Local Food Market Heatmap")
-    
+
     from heatmap import load_market_data, render_heatmap
 
     data_file = "data/Farmers_Markets.csv"
@@ -33,18 +34,29 @@ elif menu == "🥕 Food Waste Estimator":
 
     from waste_calculator import load_all_food_data, get_food_options, estimate_waste
 
-    df = load_all_food_data()
-    options_df = get_food_options(df)
-    selected_name = st.selectbox("Select a food item", options_df["CleanName"].tolist())
-    qty = st.slider("Enter quantity (lbs)", 1, 1000, 100)
+    try:
+        df = load_all_food_data()
+        options_df = get_food_options(df)
+        selected_name = st.selectbox("Select a food item", options_df["CleanName"].tolist())
+        qty = st.slider("Enter quantity (lbs)", 1, 1000, 100)
 
-    if st.button("Estimate Waste"):
-        results = estimate_waste(df, selected_name, qty)
+        if st.button("Estimate Waste"):
+            results = estimate_waste(df, selected_name, qty)
 
-        if results:
-            st.success(f"Estimated Waste: {results['waste_lbs']} lbs")
-            st.success(f"Estimated Emissions: {results['emissions_lbs']} lbs CO₂e")
-            st.info(f"Total Loss Rate: {results['total_loss_pct']}%")
-            st.caption(f"📁 Source: {results['source_file']}")
-        else:
-            st.error("Could not find data for the selected item.")
+            if results:
+                st.metric("Estimated Waste (lbs)", results["waste_lbs"])
+                st.metric("Estimated CO₂ Emissions", f"{results['emissions_lbs']} lbs")
+                st.metric("Total Loss Rate", f"{results['total_loss_pct']}%")
+
+                with st.expander("🔍 Details"):
+                    st.write(f"**Original Entry:** {results['original_name']}")
+                    st.write(f"**Category:** {results['category']}")
+                    st.caption(f"📁 Source File: {results['source_file']}")
+            else:
+                st.error("Could not find data for the selected item.")
+
+    except Exception as e:
+        st.error("There was a problem loading food data.")
+        st.exception(e)
+
+##streamlit run main.py

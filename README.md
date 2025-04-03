@@ -10,16 +10,18 @@ This project was developed as part of the **MSBA 680: Big Data & Innovation** co
 
 ### 🗺️ Local Food Market Heatmap
 - Visualizes farmers market density across the U.S. using USDA geospatial data.
-- Helps identify underserved regions and market opportunities.
+- Identifies underserved regions and local food market opportunities.
+- Includes clustering and tooltips with market names for easier navigation.
 
 ### 🥕 Food Waste Estimator
 - Calculates estimated food waste, CO₂ emissions, and financial loss based on product type and quantity.
-- Pulls real waste rates from USDA datasets across multiple food groups:
+- Uses real USDA loss rates across multiple food groups:
   - Fruit
   - Vegetables
   - Meat, poultry, fish, eggs, and nuts
   - Grains
   - Dairy
+- Shows results with clear metrics and expandable detail views.
 
 ---
 
@@ -29,48 +31,46 @@ All datasets are provided by the U.S. Department of Agriculture (USDA):
 
 - [USDA Farmers Market Directory](https://catalog.data.gov/dataset/farmers-markets)
 - [USDA Food Availability (Per Capita) Data System](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/), including:
-  - [Fruit](https://www.ers.usda.gov/webdocs/DataFiles/47788/Fruit.csv)
-  - [Vegetables](https://www.ers.usda.gov/webdocs/DataFiles/47788/Vegetables.csv)
-  - [Grains](https://www.ers.usda.gov/webdocs/DataFiles/47788/Grain.csv)
-  - [Meat, poultry, fish, eggs, and nuts](https://www.ers.usda.gov/webdocs/DataFiles/47788/Meat.csv)
-  - [Dairy](https://www.ers.usda.gov/webdocs/DataFiles/47788/Dairy.csv)
+  - Fruit.csv
+  - veg.csv
+  - grain.csv
+  - meat.csv
+  - Dairy.csv
 
-> _Note: These datasets are stored locally in the `/data` directory and not included in the public repo due to file size._
+> _Note: These datasets should be stored in the `data/` directory locally and are not included in the repo._
 
 ---
 
-## 🛠️ How to Run
+## 🛠️ How to Run the App (Windows / PowerShell)
 
-1. **Clone the repo**
-   ```bash
-   git clone https://github.com/breannanpr/FarmLinkIQ.git
-   cd FarmLinkIQ
-   ```
+### 1. Open PowerShell in the project folder:
+```powershell
+cd "C:\Users\breni\OneDrive\Documents\GitHub\FarmLinkIQ"
+```
 
-2. **Set up a virtual environment** (optional but recommended)
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
+### 2. (Optional) Set up a virtual environment:
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+```
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 3. Install dependencies:
+```powershell
+pip install -r requirements.txt
+```
 
-4. **Place the USDA datasets**  
-   Copy the following files into the `data/` folder:
-   - `Farmers_Markets.csv`
-   - `Fruit.csv`
-   - `veg.csv`
-   - `grain.csv`
-   - `meat.csv`
-   - `Dairy.csv`
+### 4. Make sure your `data/` folder contains:
+- Farmers_Markets.csv
+- Fruit.csv
+- veg.csv
+- grain.csv
+- meat.csv
+- Dairy.csv
 
-5. **Run the Streamlit app**
-   ```bash
-   streamlit run app/main.py
-   ```
+### 5. Launch the app:
+```powershell
+streamlit run main.py
+```
 
 ---
 
@@ -83,22 +83,21 @@ FarmLinkIQ is built on principles of responsible data use:
 
 ---
 
-## 🧠 Future Work
+## 🧠 Future Development Ideas
 
-This prototype could be expanded to include:
-- AI-powered buyer/seller matching
-- Real-time pricing optimization
-- Integration with weather + satellite data
-- Farmer or consumer login for customized insights
+- AI-powered buyer/seller matching system
+- Dynamic pricing analytics for local produce
+- Real-time data integration from weather/satellite sources
+- User login for personalized insights and dashboards
 
 ---
 
 ## 🙌 Acknowledgments
 
 Special thanks to:
-- Dr. Erik Guzik – for guidance in the MSBA 680 course
+- Dr. Erik Guzik – for guidance in MSBA 680
 - USDA Economic Research Service – for high-quality, public datasets
-- The open-source Python and Streamlit community
+- Open-source Python and Streamlit contributors
 
 ---
 
