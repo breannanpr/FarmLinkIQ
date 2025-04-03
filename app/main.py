@@ -1,87 +1,100 @@
 import streamlit as st
+from app.heatmap import load_market_data, render_heatmap
+from app.waste_calculator import load_all_food_data, get_food_options, estimate_waste
 
-st.set_page_config(page_title="FarmLinkIQ", layout="wide")
+# Sidebar Navigation
+st.set_page_config(page_title="FarmLinkIQ Prototype", layout="wide")
+st.sidebar.title("Choose a page:")
+page = st.sidebar.radio("", ["📘 Introduction", "🥕 Food Waste Estimator", "🗺️ Market Heatmap"])
 
-# Sidebar navigation
-menu = st.sidebar.radio("🔎 Choose a page:", ["📘 Introduction", "🥕 Food Waste Estimator", "🗺️ Market Heatmap"])
-
-if menu == "📘 Introduction":
-    st.title("🌱 Welcome to FarmLinkIQ")
+# 1. Introduction Page
+if page == "📘 Introduction":
+    st.title("🌱 FarmLinkIQ Prototype")
     st.markdown("""
-    **FarmLinkIQ** is a lightweight, data-powered prototype designed to help local and small-scale agricultural producers 
-    make smarter, more sustainable decisions.
+    Welcome to the **FarmLinkIQ** prototype — a data-driven tool created to support smarter, more sustainable decisions 
+    for small and regional agricultural producers.
 
-    This project was developed for **MSBA 680: Big Data & Innovation** at the University of Montana.
+    ### 🎯 What This Project Does
+    This prototype demonstrates how open USDA datasets can help producers:
+    - 📍 Discover food market gaps
+    - ❌ Estimate food waste and reduce environmental impact
+    - 🧠 Make better decisions about where and how to distribute food
 
-    ### 💡 What Can You Do Here?
-    - Explore **food waste estimates** based on USDA data
-    - Visualize **farmers market distribution** using real geospatial data
-    - Discover how open data can support more sustainable, localized food systems
+    Built for the **MSBA 680: Big Data & Innovation** course at the University of Montana, this tool is designed to explore 
+    how data and AI tools can transform local food systems for the better.
 
-    This tool is not just about analysis — it's about showing what's possible when small producers have access to useful, visual insights.
+    Use the **sidebar** to explore each of the tools in the prototype.
     """)
 
-elif menu == "🥕 Food Waste Estimator":
-    st.header("🥕 Food Waste Estimator")
+# 2. Food Waste Estimator
+elif page == "🥕 Food Waste Estimator":
+    st.title("🥕 Food Waste Estimator")
     st.markdown("""
-    This calculator helps you understand how much food might go to waste and what that means for the environment.
+    This calculator helps small producers and food system planners estimate how much food **might go to waste** before it reaches the consumer.
 
-    Using USDA-provided food loss data, we estimate:
-    - The pounds of food waste for a selected item and quantity
-    - The resulting CO₂ emissions
-    - Total waste rate percentages
+    ### 🧠 Why This Matters
+    Food loss means lost revenue, avoidable environmental impact, and inefficiency. Understanding this allows producers to:
+    - Adjust production based on loss rates
+    - Estimate the hidden costs of waste
+    - Reduce greenhouse gas emissions from overproduction
 
-    👉 A simple way to see how smarter production can reduce waste and improve sustainability.
+    This tool uses USDA food availability and loss data to estimate:
+    - 📦 Pounds of food waste per item
+    - 🌍 CO₂ emissions associated with that waste
+    - 📊 Total loss rates (retail + consumer)
+
+    ---
     """)
-
-    from waste_calculator import load_all_food_data, get_food_options, estimate_waste
 
     try:
         df = load_all_food_data()
-        options_df = get_food_options(df)
-        selected_name = st.selectbox("Select a food item", options_df["CleanName"].tolist())
-        qty = st.slider("Enter quantity (lbs)", 1, 1000, 100)
+        food_options = get_food_options(df)
+
+        selected_name = st.selectbox("Select a food item", food_options["CleanName"].tolist())
+        qty = st.slider("Enter quantity (lbs)", min_value=1, max_value=1000, value=100)
 
         if st.button("Estimate Waste"):
             results = estimate_waste(df, selected_name, qty)
-
             if results:
                 st.metric("Estimated Waste (lbs)", results["waste_lbs"])
                 st.metric("Estimated CO₂ Emissions", f"{results['emissions_lbs']} lbs")
                 st.metric("Total Loss Rate", f"{results['total_loss_pct']}%")
 
                 with st.expander("🔍 Details"):
-                    st.write(f"**Original Entry:** {results['original_name']}")
-                    st.write(f"**Category:** {results['category']}")
-                    st.caption(f"📁 Source File: {results['source_file']}")
+                    st.markdown(f"""
+                    **Original Entry:** {results['original_name']}  
+                    **Category:** {results['category']}  
+                    🗂️ Source File: {results['source_file']}
+                    """)
             else:
-                st.error("Could not find data for the selected item.")
-
+                st.warning("No data found for the selected item.")
     except Exception as e:
-        st.error("There was a problem loading food data.")
-        st.exception(e)
+        st.error(f"There was a problem loading food data.\n\n{e}")
 
-elif menu == "🗺️ Market Heatmap":
-    st.header("🗺️ Local Market Heatmap (Prototype)")
+# 3. Market Heatmap Page
+elif page == "🗺️ Market Heatmap":
+    st.title("🗺️ Local Food Market Heatmap")
+
     st.markdown("""
-    This is a demonstration of what's possible with geospatial market data.
+    This interactive map visualizes USDA-registered farmers market locations across the United States.
 
-    🔍 While our dataset currently focuses on **East Coast markets** from a USDA sample, this tool shows how we could:
-    - Visualize market density and underserved regions
-    - Help farmers make informed choices on where to sell their goods
-    - Highlight gaps in local food infrastructure
+    ### 🧠 How to Use This
+    Identifying where markets are **concentrated vs. absent** can help:
+    - 🧭 Allocate local food resources more effectively
+    - 📍 Discover gaps in local food access
+    - 🛒 Identify underserved areas that could benefit from new food hubs or producers
 
-    ⚠️ Due to limited open data in Montana, this version demonstrates future potential using publicly available examples.
+    🧪 This tool is a **prototype** — current USDA datasets contain more detailed info in the Eastern U.S.
+    but this concept is designed to scale with better data (like for Montana or other rural areas).
+
+    Future versions could dynamically highlight regions of opportunity based on food need and access levels.
+
+    ---
     """)
 
-    from heatmap import load_market_data, render_heatmap
-
-    data_file = "data/Farmers_Markets.csv"
-
     try:
+        data_file = "data/Farmers_Markets.csv"
         df = load_market_data(data_file)
-        st.success(f"Loaded {len(df)} farmers market locations.")
         render_heatmap(df)
     except Exception as e:
-        st.error("Failed to load map data. Make sure the CSV is in the data/ folder.")
-        st.exception(e)
+        st.error(f"Failed to load map data. Make sure the CSV is in the `data/` folder.\n\n{e}")
