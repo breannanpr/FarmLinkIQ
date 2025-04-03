@@ -59,4 +59,4 @@ elif menu == "🥕 Food Waste Estimator":
         st.error("There was a problem loading food data.")
         st.exception(e)
 
-##streamlit run main.py
+##streamlit run app/main.py
