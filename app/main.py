@@ -1,6 +1,6 @@
 import streamlit as st
-from app.heatmap import load_market_data, render_heatmap
-from app.waste_calculator import load_all_food_data, get_food_options, estimate_waste
+from heatmap import load_market_data, render_heatmap
+from waste_calculator import load_all_food_data, get_food_options, estimate_waste
 
 # Sidebar Navigation
 st.set_page_config(page_title="FarmLinkIQ Prototype", layout="wide")
