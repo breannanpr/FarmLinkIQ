@@ -1,4 +1,3 @@
-# Updated main.py without infinite launch loop
 import streamlit as st
 
 st.set_page_config(page_title="FarmLinkIQ Prototype", layout="wide")
@@ -7,8 +6,14 @@ st.title("🌱 FarmLinkIQ Prototype")
 st.subheader("Local Market Insights & Food Waste Estimator")
 
 st.markdown("""
-Welcome to the **FarmLinkIQ** prototype.  
-This tool uses USDA open data to help local producers make smarter, more sustainable decisions.
+Welcome to **FarmLinkIQ** — a tool designed to help local farmers and food producers make smarter, more sustainable decisions. 
+
+This prototype was built for the **MSBA 680: Big Data & Innovation** course at the University of Montana and focuses on helping producers:
+- Discover local food market opportunities
+- Estimate and reduce food waste
+- Understand the environmental impact of their operations
+
+Use the sidebar to explore each tool in the app.
 """)
 
 # Sidebar navigation
@@ -16,6 +21,16 @@ menu = st.sidebar.radio("Choose a tool:", ["🗺️ Market Heatmap", "🥕 Food 
 
 if menu == "🗺️ Market Heatmap":
     st.header("🗺️ Local Food Market Heatmap")
+    st.markdown("""
+    This interactive map shows the locations of farmers markets across the U.S. using USDA data. 
+
+    Each green dot represents a market where producers sell local food. Use the map to:
+    - Discover where markets are concentrated
+    - Identify regions with few markets (opportunities!)
+    - Plan smarter distribution routes
+
+    👉 **Tip:** Hover over a dot to see the market name. Zoom in to explore your area.
+    """)
 
     from heatmap import load_market_data, render_heatmap
 
@@ -31,6 +46,16 @@ if menu == "🗺️ Market Heatmap":
 
 elif menu == "🥕 Food Waste Estimator":
     st.header("🥕 Food Waste Estimator")
+    st.markdown("""
+    This tool helps producers estimate food waste and its environmental impact.
+
+    Using USDA food loss data, we calculate:
+    - How much food may be lost in the retail and consumer chain
+    - How many pounds of food waste this produces
+    - The equivalent CO₂ emissions from that waste
+
+    👉 This helps small producers reduce waste, save money, and support sustainability.
+    """)
 
     from waste_calculator import load_all_food_data, get_food_options, estimate_waste
 
@@ -58,5 +83,3 @@ elif menu == "🥕 Food Waste Estimator":
     except Exception as e:
         st.error("There was a problem loading food data.")
         st.exception(e)
-
-##streamlit run app/main.py

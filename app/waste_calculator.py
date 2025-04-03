@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import streamlit as st
 
 def load_all_food_data(data_dir="data"):
     files = {
@@ -26,8 +27,6 @@ def load_all_food_data(data_dir="data"):
         raise RuntimeError("No datasets could be loaded from the specified directory.")
 
     combined_df = pd.concat(all_data, ignore_index=True)
-
-    # ✅ Ensure CleanName is always available
     combined_df["CleanName"] = combined_df["Commodity"].fillna("").str.replace(r":.*$", "", regex=True).str.strip()
 
     return combined_df
@@ -48,6 +47,18 @@ def estimate_waste(df, selected_clean_name, quantity_lbs):
     EMISSIONS_PER_LB = 1.9
     waste_lbs = quantity_lbs * total_loss
     emissions_lbs = waste_lbs * EMISSIONS_PER_LB
+
+    st.markdown("""
+    #### 🥕 What This Tool Does
+    This calculator uses data from the USDA Food Availability and Loss system to estimate how much of a selected food item
+    will be lost before consumption — at both the **retail** and **consumer** levels.
+
+    It then estimates:
+    - The total food waste in pounds
+    - The associated CO₂ emissions based on U.S. EPA conversion factors
+
+    👉 Use this insight to understand your environmental impact and identify areas to reduce waste.
+    """)
 
     return {
         "waste_lbs": round(waste_lbs, 2),

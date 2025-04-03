@@ -1,52 +1,76 @@
 # 🌱 FarmLinkIQ Prototype
 
-**FarmLinkIQ** is a lightweight, data-driven prototype designed to support local and small-scale agricultural producers. It helps farmers identify demand gaps, reduce food waste, and optimize their impact using publicly available datasets.
+**FarmLinkIQ** is a lightweight, data-powered tool designed to support local and small-scale agricultural producers. It helps farmers answer key questions like:
+- "Where are the best places to sell my food?"
+- "How much of my produce might go to waste?"
+- "What impact does food waste have on the environment?"
 
-This project was developed as part of the **MSBA 680: Big Data & Innovation** course at the University of Montana. It showcases how open data and simple AI/analytics tools can empower producers and contribute to more sustainable food systems.
+This prototype was built for the **MSBA 680: Big Data & Innovation** course at the University of Montana, showcasing how open data and simple analytics can empower real-world decision-making.
+
+---
+
+## 🧒 What Does FarmLinkIQ Do?
+
+Imagine you're a farmer or food producer. You want to know two big things:
+1. **Where should I sell my crops?**
+2. **How can I reduce food waste and save money?**
+
+FarmLinkIQ gives you smart answers by using real data from the U.S. government. It has two main tools:
 
 ---
 
 ## 🚀 Features
 
-### 🗺️ Local Food Market Heatmap
-- Visualizes farmers market density across the U.S. using USDA geospatial data.
-- Identifies underserved regions and local food market opportunities.
-- Includes clustering and tooltips with market names for easier navigation.
+### 🗺️ 1. Local Food Market Heatmap
 
-### 🥕 Food Waste Estimator
-- Calculates estimated food waste, CO₂ emissions, and financial loss based on product type and quantity.
-- Uses real USDA loss rates across multiple food groups:
-  - Fruit
-  - Vegetables
-  - Meat, poultry, fish, eggs, and nuts
-  - Grains
-  - Dairy
-- Shows results with clear metrics and expandable detail views.
+This interactive map helps farmers **see where farmers markets are** all over the United States.
+- Every green dot = a local food market.
+- Use this to find **hot spots** or **underserved areas**.
+- Hover over dots to see market names. Zoom in to explore your region.
+
+> 🧠 It's like a map that shows where you might make the most money.
+
+---
+
+### 🥕 2. Food Waste Estimator
+
+This smart calculator helps you estimate how much food might be wasted — and how much pollution that causes.
+
+- Select a food (like apples or cheese)
+- Choose how much you’re growing (1 to 1000 lbs)
+- Click "Estimate Waste"
+
+It shows:
+- **How many pounds are wasted**
+- **CO₂ emissions caused by that waste**
+- **Where the loss happens (retail or consumer side)**
+
+> 🧠 This helps farmers waste less, save more, and protect the planet.
 
 ---
 
 ## 🌐 Live App Deployment
 
-You can try the latest working version of FarmLinkIQ here:  
+You can try the working version here:  
 🔗 [https://farmlinkiq-xppy9zvww7dxzjprsoink6.streamlit.app/](https://farmlinkiq-xppy9zvww7dxzjprsoink6.streamlit.app/)
 
-This link is hosted on **Streamlit Cloud** and reflects all real-time updates made via GitHub. No need to re-run scripts locally for testing or sharing!
+Built using [Streamlit](https://streamlit.io), it updates automatically when new changes are pushed to GitHub.
 
 ---
 
 ## 📊 Data Sources
 
-All datasets are provided by the U.S. Department of Agriculture (USDA):
+FarmLinkIQ uses open data from the **U.S. Department of Agriculture (USDA)**:
 
 - [USDA Farmers Market Directory](https://catalog.data.gov/dataset/farmers-markets)
-- [USDA Food Availability (Per Capita) Data System](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/), including:
+- [USDA Food Availability Data](https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system/), including:
   - Fruit.csv
   - veg.csv
   - grain.csv
   - meat.csv
   - Dairy.csv
 
-> _Note: These datasets should be stored in the `data/` directory locally and are not included in the repo._
+> _Stored in the `data/` folder. Small sample files used for deployment._
 
 ---
 
@@ -55,97 +79,89 @@ All datasets are provided by the U.S. Department of Agriculture (USDA):
 ```plaintext
 FarmLinkIQ/
 ├── app/
-│   ├── main.py                # Streamlit entry point
-│   ├── heatmap.py             # Heatmap logic and folium rendering
-│   └── waste_calculator.py    # Food waste logic and calculator functions
-├── data/                      # USDA food and market data CSVs
+│   ├── main.py                # Main app logic
+│   ├── heatmap.py             # Interactive map code
+│   └── waste_calculator.py    # Food waste analysis functions
+├── data/                      # USDA sample data (CSV)
 ├── requirements.txt           # Python dependencies
-├── README.md                  # Project overview
-└── .gitignore
+├── README.md                  # Project documentation
+└── .gitignore                 # Git exclusions
 ```
 
 ---
 
-## 🛠️ How to Run the App (Windows / PowerShell)
+## 🛠️ How to Run the App (Locally)
 
-### 1. Open PowerShell in the project folder:
+### 1. Clone and open the project folder:
 ```powershell
-cd "C:\Users\breni\OneDrive\Documents\GitHub\FarmLinkIQ"
+cd FarmLinkIQ
 ```
 
-### 2. (Optional) Set up a virtual environment:
+### 2. Set up your environment:
 ```powershell
 python -m venv venv
 .\venv\Scripts\activate
 ```
 
-### 3. Install dependencies:
+### 3. Install the app dependencies:
 ```powershell
 pip install -r requirements.txt
 ```
 
-### 4. Make sure your `data/` folder contains:
+### 4. Ensure your `data/` folder contains:
 - Farmers_Markets.csv
-- Fruit.csv
-- veg.csv
-- grain.csv
-- meat.csv
-- Dairy.csv
+- Fruit.csv, veg.csv, grain.csv, meat.csv, Dairy.csv
 
 ### 5. Launch the app:
 ```powershell
-streamlit run main.py
+streamlit run app/main.py
 ```
 
 ---
 
 ## 🔐 Data Ethics & Stewardship
 
-FarmLinkIQ is built on principles of responsible data use:
-- Uses only public, government-provided datasets
-- Promotes transparency, access, and equity
-- Aims to improve sustainability through smart, data-informed agriculture
-- No user data is collected or stored
+FarmLinkIQ is guided by responsible data principles:
+- Uses only public, open-source government data
+- Does not collect any user data or personal info
+- Promotes sustainability, food equity, and environmental awareness
 
 ---
 
 ## 🧠 Future Development Ideas
 
-- AI-powered buyer/seller matching system
-- Dynamic pricing analytics for local produce
-- Real-time data integration from weather/satellite sources
-- User login for personalized insights and dashboards
-- Mobile-friendly UI and farmer outreach portal
+- AI-powered crop buyer matching system
+- Real-time market pricing dashboard
+- Climate/weather overlays on the map
+- Personalized farm profiles with login
+- Mobile-first design for farmer accessibility
 
 ---
 
-## 🛠️ Code Fix for Food Waste Estimator
+## 🛠️ Code Fix: Food Estimator Stability
 
-In `waste_calculator.py`, make sure `CleanName` is added immediately after data loading:
-
+In `waste_calculator.py`, ensure the food name column (`CleanName`) is created:
 ```python
 combined_df = pd.concat(all_data, ignore_index=True)
-
-# ✅ FIX: Add CleanName column so it's always available
-temp_name = combined_df["Commodity"].fillna("")
-combined_df["CleanName"] = temp_name.str.replace(r":.*$", "", regex=True).str.strip()
-
-return combined_df
+combined_df["CleanName"] = combined_df["Commodity"].fillna("").str.replace(r":.*$", "", regex=True).str.strip()
 ```
-
-This ensures the dropdown and `estimate_waste()` logic won't break from a missing column.
+This ensures the dropdown works without crashing.
 
 ---
 
 ## 🙌 Acknowledgments
 
-Special thanks to:
-- Dr. Erik Guzik – for guidance in MSBA 680
-- USDA Economic Research Service – for high-quality, public datasets
-- Open-source Python and Streamlit contributors
+Huge thanks to:
+- **Dr. Erik Guzik** – MSBA 680 course leader
+- **USDA Economic Research Service** – Open data champions
+- **Streamlit + Python community** – For enabling data-for-good tools
 
 ---
 
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Let’s build a better food future — one dataset at a time. 🌽📊
