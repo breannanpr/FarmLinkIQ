@@ -12,13 +12,13 @@ if page == "📘 Introduction":
     st.markdown("""
     Welcome to the **FarmLinkIQ** prototype — a data-driven tool built for small and regional food producers.
 
-    Built for the **MSBA 680: Big Data & Innovation** course at the University of Montana, this project explores how 
-    open data and analytics can help producers make better decisions, reduce waste, and expand market access.
+    Built for a Big Data & Innovation course at the University of Montana. This project explores how 
+    open data and analytics can help producers make more strategic decisions about where they are selling, aim to reduce waste, and expand market access to markets in need.
 
     ---
     ### What This Prototype Shows:
     - How local market data can be visualized to identify underserved regions
-    - How food loss can be estimated to reduce waste and greenhouse gas emissions
+    - How food loss can be estimated to reduce waste
     - A framework for how small producers could use data to optimize their operations
 
     Use the sidebar to explore the tools!
