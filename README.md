@@ -152,9 +152,8 @@ This ensures the dropdown works without crashing.
 ## 🙌 Acknowledgments
 
 Huge thanks to:
-- **Dr. Erik Guzik** – MSBA 680 course leader
-- **USDA Economic Research Service** – Open data champions
-- **Streamlit + Python community** – For enabling data-for-good tools
+- **Dr. Erik Guzik**
+- **USDA Economic Research Service** 
 
 ---
 
