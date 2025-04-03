@@ -25,6 +25,15 @@ This project was developed as part of the **MSBA 680: Big Data & Innovation** co
 
 ---
 
+## 🌐 Live App Deployment
+
+You can try the latest working version of FarmLinkIQ here:  
+🔗 [https://farmlinkiq-xppy9zvww7dxzjprsoink6.streamlit.app/](https://farmlinkiq-xppy9zvww7dxzjprsoink6.streamlit.app/)
+
+This link is hosted on **Streamlit Cloud** and reflects all real-time updates made via GitHub. No need to re-run scripts locally for testing or sharing!
+
+---
+
 ## 📊 Data Sources
 
 All datasets are provided by the U.S. Department of Agriculture (USDA):
@@ -38,6 +47,22 @@ All datasets are provided by the U.S. Department of Agriculture (USDA):
   - Dairy.csv
 
 > _Note: These datasets should be stored in the `data/` directory locally and are not included in the repo._
+
+---
+
+## 🧰 Project Structure
+
+```plaintext
+FarmLinkIQ/
+├── app/
+│   ├── main.py                # Streamlit entry point
+│   ├── heatmap.py             # Heatmap logic and folium rendering
+│   └── waste_calculator.py    # Food waste logic and calculator functions
+├── data/                      # USDA food and market data CSVs
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project overview
+└── .gitignore
+```
 
 ---
 
@@ -80,6 +105,7 @@ FarmLinkIQ is built on principles of responsible data use:
 - Uses only public, government-provided datasets
 - Promotes transparency, access, and equity
 - Aims to improve sustainability through smart, data-informed agriculture
+- No user data is collected or stored
 
 ---
 
@@ -89,6 +115,25 @@ FarmLinkIQ is built on principles of responsible data use:
 - Dynamic pricing analytics for local produce
 - Real-time data integration from weather/satellite sources
 - User login for personalized insights and dashboards
+- Mobile-friendly UI and farmer outreach portal
+
+---
+
+## 🛠️ Code Fix for Food Waste Estimator
+
+In `waste_calculator.py`, make sure `CleanName` is added immediately after data loading:
+
+```python
+combined_df = pd.concat(all_data, ignore_index=True)
+
+# ✅ FIX: Add CleanName column so it's always available
+temp_name = combined_df["Commodity"].fillna("")
+combined_df["CleanName"] = temp_name.str.replace(r":.*$", "", regex=True).str.strip()
+
+return combined_df
+```
+
+This ensures the dropdown and `estimate_waste()` logic won't break from a missing column.
 
 ---
 
